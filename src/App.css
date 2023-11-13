@@ -1,0 +1,250 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+}
+
+.card,
+.card-0 {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0.5px 0.5px 20px lightgray;
+
+  --transform-y: 40px;
+}
+
+.card-0 {
+  transform: translateY(calc(var(--transform-y) * -2)) scale(1.2);
+  opacity: 0;
+  z-index: 5;
+  animation: card-0-keyframes 10s linear infinite;
+}
+
+.card-1 {
+  transform: translateY(0) scale(1);
+  z-index: 4;
+  animation: card-1-keyframes 10s linear infinite;
+}
+
+.card-2 {
+  transform: translateY(var(--transform-y)) scale(0.8);
+  z-index: 3;
+  animation: card-2-keyframes 10s linear infinite;
+}
+
+.card-3 {
+  transform: translateY(calc(var(--transform-y) * 2)) scale(0.6);
+  z-index: 2;
+  animation: card-3-keyframes 10s linear infinite;
+}
+
+.card-4 {
+  opacity: 0;
+  z-index: 1;
+  transform: translateY(calc(var(--transform-y) * 3)) scale(0.4);
+  animation: card-4-keyframes 10s linear infinite;
+}
+
+@keyframes card-0-keyframes {
+
+  0%,
+  10% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * -2)) scale(1.2);
+    z-index: 5;
+  }
+
+  20%,
+  30% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * 3)) scale(0.4);
+    z-index: 1;
+  }
+
+  40%,
+  50% {
+    opacity: 1;
+    z-index: 2;
+    transform: translateY(calc(var(--transform-y) * 2)) scale(0.6);
+  }
+
+  60%,
+  70% {
+    opacity: 1;
+    z-index: 3;
+    transform: translateY(var(--transform-y)) scale(0.8);
+  }
+
+  80%,
+  90% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 4;
+  }
+}
+
+/* main card */
+@keyframes card-1-keyframes {
+
+  0%,
+  10% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 4;
+  }
+
+  20%,
+  30% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * -2)) scale(1.2);
+    z-index: 5;
+  }
+
+  40%,
+  50% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * 3)) scale(0.4);
+    z-index: 1;
+  }
+
+  60%,
+  70% {
+    opacity: 1;
+    transform: translateY(calc(var(--transform-y) * 2)) scale(0.6);
+    z-index: 2;
+  }
+
+  80%,
+  90% {
+    opacity: 1;
+    transform: translateY(var(--transform-y)) scale(0.8);
+    z-index: 3;
+  }
+}
+
+@keyframes card-2-keyframes {
+
+  0%,
+  10% {
+    opacity: 1;
+    transform: translateY(var(--transform-y)) scale(0.8);
+    z-index: 3;
+  }
+
+  20%,
+  30% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 4;
+  }
+
+  40%,
+  50% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * -2)) scale(1.2);
+    z-index: 5;
+  }
+
+  60%,
+  70% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * 3)) scale(0.4);
+    z-index: 1;
+  }
+
+  80%,
+  90% {
+    opacity: 1;
+    transform: translateY(calc(var(--transform-y) * 2)) scale(0.6);
+    z-index: 2;
+  }
+}
+
+@keyframes card-3-keyframes {
+
+  0%,
+  10% {
+    opacity: 1;
+    transform: translateY(calc(var(--transform-y) * 2)) scale(0.6);
+    z-index: 2;
+  }
+
+  20%,
+  30% {
+    opacity: 1;
+    transform: translateY(var(--transform-y)) scale(0.8);
+    z-index: 3;
+  }
+
+  40%,
+  50% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 4;
+  }
+
+  60%,
+  70% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * -2)) scale(1.2);
+    z-index: 5;
+  }
+
+  80%,
+  90% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * 3)) scale(0.4);
+    z-index: 1;
+  }
+}
+
+@keyframes card-4-keyframes {
+
+  0%,
+  10% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * 3)) scale(0.4);
+    z-index: 1;
+  }
+
+  20%,
+  30% {
+    opacity: 1;
+    transform: translateY(calc(var(--transform-y) * 2)) scale(0.6);
+    z-index: 2;
+  }
+
+  40%,
+  50% {
+    opacity: 1;
+    transform: translateY(var(--transform-y)) scale(0.8);
+    z-index: 3;
+  }
+
+  60%,
+  70% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    z-index: 4;
+  }
+
+  80%,
+  90% {
+    opacity: 0;
+    transform: translateY(calc(var(--transform-y) * -2)) scale(1.2);
+    z-index: 5;
+  }
+}

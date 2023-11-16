@@ -1,19 +1,13 @@
 import './App.css'
-import CardStack from './CardStack';
+// import CardStack from './CardStack';
+import { StripeCards } from "./StripeCards";
 
-const notifications = [
-  <div>Your notification content 1</div>,
-  <div>Your notification content 2</div>,
-  <div>Your notification content 3</div>,
-  <div>Your notification content 4</div>,
-  <div>Your notification content 5</div>,
-];
 
 function App() {
   return (
-    <>
-      <CardStack items={notifications} />
-    </>
+    <div className='entries'>
+      <StripeCards />
+    </div>
   )
 }
 

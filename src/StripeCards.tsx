@@ -1,31 +1,14 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { generateDataOfLength } from "./generateRandomText"
-
-// function buildChunkGetter<T>(inputArray: T[], noOfElements: number) {
-//   let count = 0
-//   return function get()  {
-//     let i = 0     
-//     const array = []
-//     while (i < noOfElements) {
-//       array.push(inputArray[(i + count) % inputArray.length])
-//       i++ 
-//     }
-//     count++
-//     return array
-//   }
-// }
 
 const initialClassNames = ['card-0', 'card-1', 'card-2', 'card-3', 'card-4']
 const randomTexts = generateDataOfLength(initialClassNames.length)
 
 export function StripeCards() {
   const [classNames, setClassNames] = useState(initialClassNames)
-  const [height, setHeight] = useState({
-    prevHeight: 0,
-    currHeight: 0
-  })
+  const [currentHeight, setCurrentHeight] = useState(0)
   const timer = useRef<number>(0)
-  const visibleDiv = useRef<HTMLDivElement>(null)
+  const card1 = useRef<HTMLLIElement>(null)
 
   function updateClassNames() {
     setClassNames(prevClassNames => {
@@ -36,15 +19,8 @@ export function StripeCards() {
   }
 
   function updateHeight() {
-    if (visibleDiv.current !== null) {
-      const { height } = visibleDiv.current.getBoundingClientRect()
-      setHeight((prevValue) => {
-        return {
-          prevHeight: prevValue.currHeight,
-          currHeight: height
-        }
-      })
-    }
+    const { clientHeight } = card1.current!;
+    setCurrentHeight(clientHeight)
   }
 
   // on mounted start shuffling
@@ -58,30 +34,82 @@ export function StripeCards() {
     }
   }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     updateHeight()
   }, [classNames])
 
   return (
-    <div className="container" style={{ '--curr-card-height': `${height.currHeight}px`, '--prev-card-height': `${height.prevHeight}px` } as React.CSSProperties}>
-      {/* <div className="container" > */}
+    <ul className="container">
       {classNames.map((className, index) => {
-        if (className === 'card-1') {
-          return <div className={`card ${className}`} key={index} ref={visibleDiv}>
-            {randomTexts[index].text}
-          </div>
-        }
+        const getTransformation = (height: number, scale: number) => `translateY(${height}px) scale(${scale})`
+        const text = randomTexts[index].text.slice(70)
+        switch (className) {
+          case 'card-0':
+            return <li
+              className={className}
+              key={index}
+              style={{
+                transform: getTransformation(currentHeight - 30, 1.07)
+              }}
+            >
+              <p>
+                {text}
+              </p>
+            </li>
+          case 'card-2':
+            return <li
+              className={className}
+              key={index}
+              style={{
+                transform: getTransformation(currentHeight + 30, 0.934579)
+              }}
+            >
+              <p>
+                {text}
+              </p>
+            </li>
+          case 'card-3':
+            return <li
+              className={className}
+              key={index}
+              style={{
+                transform: getTransformation(currentHeight + 2 * 30, 0.873439)
+              }}
+            >
+              <p>
+                {text}
+              </p>
+            </li>
+          case 'card-4':
+            return <li
+              className={className}
+              key={index}
+              style={{
+                transform: getTransformation(currentHeight + 3 * 30, 0.816298)
+              }}
+            >
+              <p>
+                {text}
+              </p>
+            </li>
 
-        return <div className={`card ${className}`} key={index} >
-          {randomTexts[index].text}
-        </div>
+          // card-1
+          default:
+            return <li
+              className={className}
+              key={index}
+              ref={card1}
+              style={{
+                transform: getTransformation(currentHeight, 1)
+              }}
+            >
+              <p>
+                {text}
+              </p>
+            </li>
+        }
       })}
-      {/* <div className="card card-0" /> 
-      <div className="card card-1" />
-      <div className="card card-2" />
-      <div className="card card-3" />
-      <div className="card card-4" /> */}
-    </div>
+    </ul>
   )
 }
 

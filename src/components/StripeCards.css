@@ -1,48 +1,27 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-p {
-  padding: 0;
-  margin: 0;
-}
-
-.entries {
-  width: 400px;
-  height: 400px;
-}
-
-.container {
+ul.container {
   position: relative;
   --transition-duration: 1250ms;
   --transition-delay: 250ms;
+  list-style: none;
 }
 
-.entries li {
+li {
   --offset-delay: var(--transition-delay);
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   opacity: 0;
-  ;
   background-color: #fff;
-  border-radius: 4px;
   overflow: hidden;
+  border-radius: 4px;
   transform: translateY(100%);
   transition: all var(--transition-duration);
   transition-delay: var(--offset-delay);
   transform-origin: 50% 100%;
 }
 
-
-li>p {
-  padding: 24px;
-}
-
-.entries li::after {
+li::after {
   content: "";
   position: absolute;
   left: 0;
@@ -87,13 +66,13 @@ li.card-2::after {
 
 li.card-3 {
   --offset-delay: calc(var(--transition-delay) * 0.75);
-  color: transparent;
   opacity: 1;
   z-index: 8;
 }
 
 li.card-3::after {
-  opacity: 0.5;
+  background: linear-gradient(180deg, #fff, #e9edf1) bottom/100% 150px repeat-x;
+  opacity: 1;
 }
 
 li.card-4 {

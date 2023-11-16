@@ -1,0 +1,54 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.demo-container {
+  width: 400px;
+  height: 600px;
+}
+
+.custom-card {
+  display: flex;
+}
+
+.custom-card section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 20px;
+  color: #32325d;
+}
+
+.custom-card section .heading {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.custom-card section .message {
+  padding-top: 8px;
+  font-size: 16px;
+  color: #525f7f;
+  font-weight: 400;
+}
+
+section .name {
+  text-align: right;
+  font-size: 14px;
+}
+
+section .name::before {
+  content: "- ";
+}
+
+
+.custom-card img {
+  height: 92px;
+  width: 92px;
+}

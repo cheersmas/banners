@@ -1,20 +1,16 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { getTransformation } from "./utils";
+
 import "./StripeCards.css";
 
-const initialClassNames = ["card-0", "card-1", "card-2", "card-3", "card-4"];
-
-type Children = JSX.Element[];
-
 type Props = {
-  children: Children;
+  children: JSX.Element[];
   duration?: number;
 };
 
-function getTransformation(height: number, scale: number) {
-  return `translateY(${height}px) scale(${scale})`;
-}
+const initialClassNames = ["card-1", "card-2", "card-3", "card-4", "card-0"];
 
-export function StripeCards({ children, duration = 5000 }: Props) {
+export function StripeCards({ children, duration = 2000 }: Props) {
   const [classNames, setClassNames] = useState(initialClassNames);
   const [currentHeight, setCurrentHeight] = useState(0);
   const timer = useRef<number>(0);

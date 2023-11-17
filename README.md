@@ -4,7 +4,7 @@
 
 Animation:
 
-<video src="./animation.mov" controls="controls" style="max-width: 500px"></video>
+<video src="https://github.com/cheersmas/stack-notification/raw/main/animation.mov" controls="controls" style="max-width: 500px"></video>
 
 
 ## Setting up the project

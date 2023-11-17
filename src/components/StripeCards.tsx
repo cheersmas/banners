@@ -1,47 +1,43 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { getTransformation } from "./utils";
+import {
+  useHeight,
+  useClassNameRotation,
+  useChildrenIndiciesGen,
+} from "./hooks";
 
 import "./StripeCards.css";
 
 type Props = {
   children: JSX.Element[];
   duration?: number;
-  onTick: (count: number, index: number) => void;
 };
 
-const initialClassNames = ["card-1", "card-2", "card-3", "card-4", "card-0"];
+export function StripeCards({ children, duration = 2000 }: Props) {
+  const {
+    ref: topCardRef,
+    height: currentHeight,
+    updateHeight,
+  } = useHeight<HTMLLIElement>();
 
-export function StripeCards({ children, duration = 2000, onTick }: Props) {
-  const count = useRef(0);
-  const [classNames, setClassNames] = useState(initialClassNames);
-  const [currentHeight, setCurrentHeight] = useState(0);
+  const { count, classNames, updateClassNames } = useClassNameRotation();
+
+  const { childrenIndex, updateChildrenIndex } = useChildrenIndiciesGen(
+    children.length
+  );
+
   const timer = useRef<number>(0);
-  const topCardRef = useRef<HTMLLIElement>(null);
-
-  function updateHeight() {
-    const { clientHeight } = topCardRef.current!;
-    setCurrentHeight(clientHeight);
-  }
 
   useEffect(() => {
-    function updateClassNames() {
-      count.current++;
-      setClassNames((prevClassNames) => {
-        const updateClassNames = [...prevClassNames];
-        updateClassNames.unshift(updateClassNames.pop() as string);
-        return updateClassNames;
-      });
-    }
-
     timer.current = setInterval(() => {
+      updateChildrenIndex(count.current, classNames.indexOf("card-0"));
       updateClassNames();
-      onTick(count.current, classNames.indexOf("card-0"));
     }, duration);
 
     return () => {
       clearInterval(timer.current);
     };
-  }, [duration, onTick, classNames]);
+  }, [duration, classNames, updateClassNames, count, updateChildrenIndex]);
 
   useLayoutEffect(() => {
     updateHeight();
@@ -50,7 +46,7 @@ export function StripeCards({ children, duration = 2000, onTick }: Props) {
   return (
     <ul className="container">
       {classNames.map((className, index) => {
-        const element = children[index];
+        const element = children[childrenIndex[index]];
         switch (className) {
           case "card-0":
             return (

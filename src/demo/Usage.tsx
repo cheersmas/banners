@@ -52,6 +52,8 @@ export default function Usage() {
   function onTick(input: number, index: number) {
     const indexToInsert = (5 + count) % data.length;
 
+    console.log(input, index, indexToInsert);
+
     setComponentsIndex((previous) => {
       previous[index] = indexToInsert;
       return [...previous];

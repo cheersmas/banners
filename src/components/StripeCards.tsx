@@ -18,29 +18,30 @@ export function StripeCards({ children, duration = 2000, onTick }: Props) {
   const timer = useRef<number>(0);
   const topCardRef = useRef<HTMLLIElement>(null);
 
-  function updateClassNames() {
-    setClassNames((prevClassNames) => {
-      const updateClassNames = [...prevClassNames];
-      updateClassNames.unshift(updateClassNames.pop() as string);
-      count.current++;
-      return updateClassNames;
-    });
-  }
-
   function updateHeight() {
     const { clientHeight } = topCardRef.current!;
     setCurrentHeight(clientHeight);
   }
 
   useEffect(() => {
+    function updateClassNames() {
+      count.current++;
+      setClassNames((prevClassNames) => {
+        const updateClassNames = [...prevClassNames];
+        updateClassNames.unshift(updateClassNames.pop() as string);
+        return updateClassNames;
+      });
+    }
+
     timer.current = setInterval(() => {
       updateClassNames();
+      onTick(count.current, classNames.indexOf("card-0"));
     }, duration);
 
     return () => {
       clearInterval(timer.current);
     };
-  }, [duration, onTick]);
+  }, [duration, onTick, classNames]);
 
   useLayoutEffect(() => {
     updateHeight();
@@ -59,10 +60,6 @@ export function StripeCards({ children, duration = 2000, onTick }: Props) {
                 style={{
                   transform: getTransformation(currentHeight - 30, 1.07),
                 }}
-                onTransitionEnd={(event) =>
-                  event.propertyName === "transform" &&
-                  onTick(count.current, index)
-                }
               >
                 {element}
               </li>

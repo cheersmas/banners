@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { StripeCards } from "../components/StripeCards";
+import { Banners } from "../components/Banners";
 
 import data from "./data.json";
 
@@ -37,7 +37,7 @@ export default function Usage() {
 
   return (
     <div className="demo-container">
-      <StripeCards>{components}</StripeCards>
+      <Banners>{components}</Banners>
     </div>
   );
 }

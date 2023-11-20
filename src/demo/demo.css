@@ -10,8 +10,8 @@ p {
 }
 
 .demo-container {
-  width: 400px;
-  height: 600px;
+  width: 600px;
+  height: 400px;
 }
 
 .custom-card {
@@ -40,6 +40,7 @@ p {
 
 section .name {
   text-align: right;
+  padding-top: 8px;
   font-size: 14px;
 }
 
@@ -51,4 +52,29 @@ section .name::before {
 .custom-card img {
   height: 92px;
   width: 92px;
+}
+
+.custom-card-v2 {
+  height: 400px;
+  width: 600px;
+}
+
+.custom-card-v2 img {
+  object-fit: contain;
+  /* object-fit: fill; */
+}
+
+.options .buttons-container {
+  display: flex;
+  position: relative;
+  z-index: 30;
+}
+
+.options button {
+  color: white
+}
+
+
+.options button:not(:first-child) {
+  margin-left: 8px;
 }
